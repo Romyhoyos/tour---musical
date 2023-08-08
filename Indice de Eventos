@@ -133,4 +133,38 @@ def mostrar_eventos():
         def guardar_calificacion():
             rating = rating_var.get()
             messagebox.showinfo("Calificación Guardada", f"Has calificado '{evento.nombre}' con {rating} estrellas.")
+
+import tkinter as tk
+from tkinter import messagebox
+
+historial_eventos = []
+
+def mostrar_historial():
+    ventana = tk.Tk()
+    ventana.title("Historial de Eventos Asistidos")
+    
+    if not historial_eventos:
+        messagebox.showinfo("Historial Vacío", "Aún no has asistido a ningún evento.")
+        return
+    
+    for evento in historial_eventos:
+        frame = tk.Frame(ventana)
+        frame.pack(pady=10)
         
+        label_nombre = tk.Label(frame, text=evento.nombre, font=("Helvetica", 16))
+        label_nombre.pack()
+        
+        label_artista = tk.Label(frame, text=f"Artista: {evento.artista}")
+        label_artista.pack()
+        
+        label_genero = tk.Label(frame, text=f"Género: {evento.genero}")
+        label_genero.pack()
+        
+        label_ubicacion = tk.Label(frame, text=f"Ubicación: {evento.ubicacion}")
+        label_ubicacion.pack()
+        
+    ventana.mainloop()
+
+def asistir_evento(evento):
+    historial_eventos.append(evento)
+    messagebox.showinfo("Evento")
