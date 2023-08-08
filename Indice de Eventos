@@ -1,0 +1,90 @@
+# Definir una clase Evento para representar cada evento musical
+class Evento:
+    def __init__(self, nombre, artista, genero, ubicacion):
+        self.nombre = nombre
+        self.artista = artista
+        self.genero = genero
+        self.ubicacion = ubicacion
+
+# Crear una lista de eventos
+eventos = [
+    Evento("Concierto 1", "Artista 1", "Género 1", "Ubicación 1"),
+    Evento("Concierto 2", "Artista 2", "Género 2", "Ubicación 2"),
+    Evento("Concierto 3", "Artista 3", "Género 1", "Ubicación 3"),
+    # Agrega más eventos según sea necesario
+]
+
+# Mostrar los detalles de cada evento en el índice
+for evento in eventos:
+    print("Nombre del evento:", evento.nombre)
+    print("Artista:", evento.artista)
+    print("Género musical:", evento.genero)
+    print("Ubicación:", evento.ubicacion)
+    print("---------------------------")
+
+# Crear una lista de eventos
+eventos = [
+    Evento("Concierto 1", "Artista 1", "Género 1", "Ubicación 1"),
+    Evento("Concierto 2", "Artista 2", "Género 2", "Ubicación 2"),
+    Evento("Concierto 3", "Artista 3", "Género 1", "Ubicación 3"),
+    # Agrega más eventos según sea necesario
+]
+
+# Función de búsqueda de eventos
+def buscar_eventos(filtro):
+    resultados = []
+    for evento in eventos:
+        if filtro.lower() in evento.nombre.lower() or filtro.lower() in evento.genero.lower() or filtro.lower() in evento.artista.lower():
+            resultados.append(evento)
+    return resultados
+
+def filtrar_eventos(ubicacion, horario):
+    resultados = []
+    for evento in eventos:
+        if ubicacion.lower() in evento.ubicacion.lower() and horario.lower() in evento.horario.lower():
+            resultados.append(evento)
+    return resultados
+
+filtro = input("Ingrese un nombre de evento, género o artista: ")
+resultados_busqueda = buscar_eventos(filtro)
+for evento in resultados_busqueda:
+    print("Evento encontrado:")
+    print("Nombre del evento:", evento.nombre)
+    print("Artista:", evento.artista)
+    print("Género musical:", evento.genero)
+    print("Ubicación:", evento.ubicacion)
+    print("---------------------------")
+
+ubicacion_filtro = input("Ingrese una ubicación para filtrar (deje en blanco si no desea filtrar por ubicación): ")
+horario_filtro = input("Ingrese un horario para filtrar (deje en blanco si no desea filtrar por horario): ")
+resultados_filtrados = filtrar_eventos(ubicacion_filtro, horario_filtro)
+for evento in resultados_filtrados:
+    print("Evento filtrado:")
+    print("Nombre del evento:")
+
+import tkinter as tk
+from tkinter import ttk
+
+# Función para visualizar los eventos en un mapa
+def visualizar_eventos_mapa(eventos):
+    # Crear un objeto de mapa centrado en una ubicación inicial
+    mapa = tk.Map(location=(40.7128, -74.0060), zoom_start=10)
+
+    # Agregar marcadores de ubicación para cada evento en el mapa
+    for evento in eventos:
+        ttk.Marker(
+            location=evento.ubicacion,
+            popup=f"<b>{evento.nombre}</b><br>Artista: {evento.artista}<br>Género: {evento.genero}"
+        ).add_to(mapa)
+
+    # Mostrar el mapa
+    return mapa
+
+# Función para planificar la ruta entre eventos
+def planificar_ruta(eventos):
+    geolocator = ttk(user_agent="tour-app")
+    ubicaciones = []
+    for evento in eventos:
+        ubicacion = geolocator.reverse(evento.ubicacion)
+        ubicaciones.append(ubicacion.address.split(",")[0])
+        print
