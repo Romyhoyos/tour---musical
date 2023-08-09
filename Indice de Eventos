@@ -204,5 +204,41 @@ def mostrar_eventos():
             rating = rating_var.get()
             messagebox.showinfo("Calificación Guardada", f"Has calificado '{evento.nombre}' con {rating} estrellas.")
         
+import tkinter as tk
+from tkinter import messagebox
+
+def mostrar_eventos():
+    ventana = tk.Tk()
+    ventana.title("Tour Musical")
+
+    for evento in eventos:
+        frame = tk.Frame(ventana)
+        frame.pack(pady=10)
+        
+        label_nombre = tk.Label(frame, text=evento.nombre, font=("Helvetica", 16))
+        label_nombre.pack()
+        
+        label_artista = tk.Label(frame, text=f"Artista: {evento.artista}")
+        label_artista.pack()
+        
+        label_genero = tk.Label(frame, text=f"Género: {evento.genero}")
+        label_genero.pack()
+        
+        label_ubicacion = tk.Label(frame, text=f"Ubicación: {evento.ubicacion}")
+        label_ubicacion.pack()
+        
+        rating_frame = tk.Frame(frame)
+        rating_frame.pack(pady=10)
+        
+        label_rating = tk.Label(rating_frame, text="Calificación:")
+        label_rating.pack(side=tk.LEFT)
+        
+        rating_var = tk.IntVar()
+        
+        def guardar_calificacion():
+            rating = rating_var.get()
+            messagebox.showinfo("Calificación Guardada", f"Has calificado '{evento.nombre}' con {rating} estrellas.")
+        
+        
     
            
